@@ -35,7 +35,7 @@ public:
 
 int main(){
     Solution s;
-   cout<< s.jumpFloor(4)<<endl;
+    cout<< s.jumpFloor(4)<<endl;
 
     return 0;
 }
