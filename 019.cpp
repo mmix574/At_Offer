@@ -35,6 +35,7 @@ public:
         int row = matrix.size();
         int col = matrix[0].size();
         int loop_count = ((row<col?row:col)+1)/2;
+        int odd = (row<col?row:col)%2;
 
         if(row==1){
             return matrix[0];
@@ -44,33 +45,33 @@ public:
             }
             return r_s;
         }
-        cout<<loop_count<<endl;
+
         for (int loop = 0; loop < loop_count; ++loop) {
-            for (int i = loop; i < col-loop-1; ++i) {
-                r_s.push_back(matrix[loop][i]);
-//                cout<<matrix[loop][i]<<" ";
+
+            for (int x = loop; x < col-loop; ++x) {
+                r_s.push_back(matrix[loop][x]);
             }
-            for (int i = loop; i < row-loop-1; ++i) {
-                r_s.push_back(matrix[i][row-loop-1]);
-//                cout<<matrix[i][row-loop-1]<<" ";
+            for (int y= loop+1; y <row-loop-1 ; y++) {
+                r_s.push_back(matrix[y][col-1-loop]);
             }
-            for (int i = col-1-loop; i >loop; i--) {
-                r_s.push_back(matrix[row-1-loop][i]);
-//                cout<<matrix[row-1-loop][i]<<" ";
+            if(!(odd&&loop==loop_count-1)){
+                for (int x = col-1-loop; x >loop-1 ; x--) {
+                    r_s.push_back(matrix[row-1-loop][x]);
+                }
             }
-            for (int i = row-1-loop; i > loop; i--) {
-//                cout<<matrix[i][loop]<<" ";
-                r_s.push_back(matrix[i][loop]);
+            for(int y=row-2-loop;y>loop;y--) {
+                r_s.push_back(matrix[y][loop]);
             }
         }
+
 
 		return r_s;
     }
 };
 
 
-#define ROW_NUM 5
-#define COL_NUM 5
+#define ROW_NUM 6
+#define COL_NUM 1
 
 
 int main(){
