@@ -6,10 +6,11 @@ using namespace std;
 class Solution {
 public:
     void stack_print(stack<int> s){
-        while (!s.size()){
+        while (s.size()){
             cout<<s.top()<<" ";
             s.pop();
         }
+        cout<<endl;
     }
 
     int find(vector<int > &data,int something){
@@ -29,9 +30,12 @@ public:
         int len = popV.size();
 
         stack<int> ss;
+
+
         int push_pos=0;
         for (int i = 0; i < len; ++i) {
-            
+            cout<<"check..."<<popV[i]<<" ";
+            cout<<"push_pos:"<<push_pos<<" ";
             stack_print(ss);
 
             if(pushV[push_pos]==popV[i]){
@@ -39,16 +43,20 @@ public:
                 continue;
             }else{
                 int pos = find(pushV,popV[i]);
-                if(pos>push_pos){
-                    for (int j = push_pos; j <= pos; ++j) {
+
+                if(pos==-1){
+                    return false;
+                }
+                else if(pos>push_pos){
+                    for (int j = push_pos; j < pos; ++j) {
                         ss.push(pushV[j]);
                     }
+                    push_pos = pos+1;
                 }else{
                     if(ss.empty()){
                         return false;
                     }else if(ss.top()==popV[i]){
                         ss.pop();
-                        push_pos++;
                     }else{
                         return false;
                     }
