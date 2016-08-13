@@ -16,10 +16,9 @@ struct TreeNode {
 
 class Solution {
 public:
-
 	vector<vector<int> > result;
-
-    void dfs(TreeNode* root,int exp,vector<int > path){
+	vector<int> t;
+	void findall(TreeNode* root,int exp,vector<int > path){
 		//base
 		if(!root->left&&!root->right&&exp==root->val){
 			path.push_back(root->val);
@@ -28,19 +27,19 @@ public:
 			if(root->val<exp){
 				path.push_back(root->val);
 				if(root->left){
-					dfs(root->left,exp-root->val,path);
+					findall(root->left,exp-root->val,path);
 				}
 				if(root->right){
-					dfs(root->right,exp-root->val,path);
+					findall(root->right,exp-root->val,path);
 				}
 			}
 		}
-    }
-    vector<vector<int> > FindPath(TreeNode* root,int expectNumber) {
-		vector<int> t;
-		dfs(root,expectNumber,t);
-        return result;
-    }
+	}
+	vector<vector<int> > FindPath(TreeNode* root,int expectNumber) {
+		if(!root){return result;}
+		findall(root,expectNumber,t);
+		return result;
+	}
 };
 
 int main(){
