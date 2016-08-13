@@ -17,27 +17,9 @@ struct TreeNode {
 class Solution {
 public:
 
-    stack s;
 
-    int stackSum(stack s){
-        int sum = 0;
-        while (!s.empty()){
-            sum+=s.top();
-            s.pop();
-        }
-        return sum;
-    }
+    bool dfs(TreeNode* root,int exp){
 
-    void dfs(TreeNode* root,int exp){
-        if(stackSum(s)+root){
-            
-        }
-
-        if(root->left){
-
-        }else{
-
-        }
     }
 
     vector<vector<int> > FindPath(TreeNode* root,int expectNumber) {
