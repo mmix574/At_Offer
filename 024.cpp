@@ -31,7 +31,7 @@ public:
 					dfs(root->left,exp-root->val,path);
 				}
 				if(root->right){
-					dfs(root->left,exp-root->val,path);
+					dfs(root->right,exp-root->val,path);
 				}
 			}
 		}
@@ -44,7 +44,11 @@ public:
 };
 
 int main(){
-
+	vector<int > v;
+	vector<int> c = v;
+	c.push_back(1);
+	cout<<v.size()<<endl;
+	cout<<c.size()<<endl;
 
     return 0;
 }
