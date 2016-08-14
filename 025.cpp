@@ -30,27 +30,35 @@ public:
     RandomListNode* Clone(RandomListNode* pHead)
     {
         if(pHead==NULL){return NULL;}
+        RandomListNode * tHead = pHead;
+        int len = 0;
+        while(tHead){
+            len ++;
+            tHead=tHead->next;
+        }
+
         RandomListNode *head=NULL,*tail=NULL;
-        int pos = 0;
-        while(pHead!=NULL){
-            if(pHead->random!=NULL){
-                l_mapping[pHead->label] = pHead->random->label;
+        int pos = 0;tHead = pHead;
+
+        while(tHead!=NULL){
+            if(tHead->random!=NULL){
+                l_mapping[tHead->label] = tHead->random->label;
             }
             RandomListNode *p = (RandomListNode *)malloc(sizeof(RandomListNode));
             if(!head){
                 head = tail = p;
-                p->label = pHead->label;
+                p->label = tHead->label;
                 p->next = NULL;
                 p->random = NULL;
             }else{
-                p->label = pHead->label;
+                p->label = tHead->label;
                 p->next = NULL;
                 p->random = NULL;
                 tail->next = p;
                 tail = p;
             }
-            p_mapping[pHead->label] = &(p->next);
-            pHead = pHead->next;
+            p_mapping[tHead->label] = &(p->next);
+            tHead = tHead->next;
         }
         map<int,int>::iterator itr;
         for(itr = l_mapping.begin();itr!=l_mapping.end();itr++){
