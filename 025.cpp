@@ -12,21 +12,51 @@ struct RandomListNode {
     }
 };
 
+
+void ListPrint(RandomListNode * head){
+    while (!head){
+        cout<<head->label<<"->";
+        head = head ->next;
+    }
+}
+
 class Solution {
 public:
-    map<int,int> mapping;
+//    position => label
+    map<int,int> l_mapping;
+//    new LinkedList label =>random pointer
+    map<int,RandomListNode **> p_mapping;
 
     RandomListNode* Clone(RandomListNode* pHead)
     {
         if(pHead==NULL){return NULL;}
         RandomListNode *head=NULL,*tail=NULL;
+        int pos = 0;
         while(pHead!=NULL){
+            if(pHead->random!=NULL){
+                l_mapping[pHead->label] = pHead->random->label;
+            }
             RandomListNode *p = (RandomListNode *)malloc(sizeof(RandomListNode));
-
-            p->label = pHead->label;
-            p->next = NULL;
-
+            if(!head){
+                head = tail = p;
+                p->label = pHead->label;
+                p->next = NULL;
+                p->random = NULL;
+            }else{
+                p->label = pHead->label;
+                p->next = NULL;
+                p->random = NULL;
+                tail->next = p;
+                tail = p;
+            }
+            p_mapping[pHead->label] = &(p->next);
+            pHead = pHead->next;
         }
+        map<int,int>::iterator itr;
+        for(itr = l_mapping.begin();itr!=l_mapping.end();itr++){
+            *(p_mapping[itr->first]) = *(p_mapping[itr->second]);
+        }
+        return head;
     }
 };
 
@@ -42,6 +72,12 @@ int main(){
     for(itr = m.begin();itr!=m.end();itr++){
         cout<<itr->first<<"->"<<itr->second<<endl;
     }
-//    cout<<m[3]<<endl;
+    itr = m.find(5);
+
+
+    if(itr!=m.end()){
+        cout<<itr->second<<endl;
+    }
+
     return 0;
 }
