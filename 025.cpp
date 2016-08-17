@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <map>
 
 using namespace std;
@@ -14,35 +15,67 @@ struct RandomListNode {
 
 
 void ListPrint(RandomListNode * head){
-    while (!head){
+    while (head){
         cout<<head->label<<"->";
         head = head ->next;
     }
 }
 
+RandomListNode * create(vector<int> initdata){
+    int size = initdata.size();
+    RandomListNode * head = NULL;
+    RandomListNode * tail = NULL;
+    for (int i = 0; i < size; ++i) {
+        if(!head){
+            head = tail = (RandomListNode *)malloc(sizeof(RandomListNode));
+            head ->next = NULL;
+            head ->label = initdata[i];
+            head ->random = NULL;
+        }else{
+            tail->next = (RandomListNode *)malloc(sizeof(RandomListNode));
+            tail = tail->next;
+            tail->label=initdata[i];
+            tail->random = NULL;
+            tail->next = NULL;
+        }
+    }
+    return head;
+}
+
 class Solution {
 public:
-//    position => label
-    map<int,int> l_mapping;
-//    new LinkedList label =>random pointer
+
+    map<int,int> d_mapping;
     map<int,RandomListNode **> p_mapping;
+    map<int,RandomListNode *> n_mapping;
+
+    int rorder (RandomListNode *p){
+        int len = 0 ;
+        while (p){
+            len++;
+            p=p->next;
+        }
+        return len;
+    };
 
     RandomListNode* Clone(RandomListNode* pHead)
     {
         if(pHead==NULL){return NULL;}
         RandomListNode * tHead = pHead;
-        int len = 0;
-        while(tHead){
-            len ++;
-            tHead=tHead->next;
-        }
+
+        //int len = 0;
+        //while(tHead){
+        //  len ++;
+        //tHead=tHead->next;
+        //}
 
         RandomListNode *head=NULL,*tail=NULL;
-        int pos = 0;tHead = pHead;
+        //int pos = 0;
+        tHead = pHead;
 
         while(tHead!=NULL){
-            if(tHead->random!=NULL){
-                l_mapping[tHead->label] = tHead->random->label;
+            if(tHead->random){
+                d_mapping[rorder(tHead)] = rorder(tHead->random);
             }
             RandomListNode *p = (RandomListNode *)malloc(sizeof(RandomListNode));
             if(!head){
@@ -57,35 +90,33 @@ public:
                 tail->next = p;
                 tail = p;
             }
-            p_mapping[tHead->label] = &(p->next);
+            n_mapping[rorder(tHead)] = p;
+            p_mapping[rorder(tHead)] = &(p->next);
             tHead = tHead->next;
         }
         map<int,int>::iterator itr;
-        for(itr = l_mapping.begin();itr!=l_mapping.end();itr++){
-            *(p_mapping[itr->first]) = *(p_mapping[itr->second]);
+        for(itr = d_mapping.begin();itr!=d_mapping.end();itr++){
+            *(p_mapping[itr->first]) = n_mapping[itr->second];
         }
         return head;
     }
 };
 
 int main(){
-    map<int,int > m;
-    m.insert(map<int,int>::value_type(1,2));
-    m.insert(map<int,int>::value_type(1,3));//invalid
-    m.insert(pair<int,int>(2,2));
-    m.insert(pair<int,int>(3,2));
+    int a = clock();
 
-    map<int,int>::iterator itr;
-    m[4] = 5;
-    for(itr = m.begin();itr!=m.end();itr++){
-        cout<<itr->first<<"->"<<itr->second<<endl;
-    }
-    itr = m.find(5);
-
-
-    if(itr!=m.end()){
-        cout<<itr->second<<endl;
+    vector<int> v ;
+    for (int i = 0; i < 10000; ++i) {
+        v.push_back(i);
     }
 
+    RandomListNode *p = create(v);
+
+    Solution s;
+    RandomListNode * newList = s.Clone(p);
+    ListPrint(newList);
+
+    int b = clock();
+    printf("total time %d",b-a);
     return 0;
 }
