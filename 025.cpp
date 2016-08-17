@@ -45,59 +45,43 @@ RandomListNode * create(vector<int> initdata){
 class Solution {
 public:
 
-    map<int,int> d_mapping;
-    map<int,RandomListNode **> p_mapping;
-    map<int,RandomListNode *> n_mapping;
 
-    int rorder (RandomListNode *p){
-        int len = 0 ;
-        while (p){
-            len++;
-            p=p->next;
-        }
-        return len;
-    };
+    map<RandomListNode *,int > bef;
+    map<int,RandomListNode * > aft;
 
     RandomListNode* Clone(RandomListNode* pHead)
     {
-        if(pHead==NULL){return NULL;}
-        RandomListNode * tHead = pHead;
-
-        //int len = 0;
-        //while(tHead){
-        //  len ++;
-        //tHead=tHead->next;
-        //}
-
-        RandomListNode *head=NULL,*tail=NULL;
-        //int pos = 0;
-        tHead = pHead;
-
-        while(tHead!=NULL){
-            if(tHead->random){
-                d_mapping[rorder(tHead)] = rorder(tHead->random);
-            }
+        RandomListNode * t = pHead;
+        RandomListNode * head = NULL;
+        RandomListNode * tail = NULL;
+        int i = 0;
+        while(t){
+            bef[t] = i;
             RandomListNode *p = (RandomListNode *)malloc(sizeof(RandomListNode));
+            aft[i] = p;
+            i++;
+            p->random = NULL;
+            p->next = NULL;
+            p->label = t->label;
+
             if(!head){
                 head = tail = p;
-                p->label = tHead->label;
-                p->next = NULL;
-                p->random = NULL;
             }else{
-                p->label = tHead->label;
-                p->next = NULL;
-                p->random = NULL;
                 tail->next = p;
                 tail = p;
             }
-            n_mapping[rorder(tHead)] = p;
-            p_mapping[rorder(tHead)] = &(p->next);
-            tHead = tHead->next;
+            t=t->next;
         }
-        map<int,int>::iterator itr;
-        for(itr = d_mapping.begin();itr!=d_mapping.end();itr++){
-            *(p_mapping[itr->first]) = n_mapping[itr->second];
+        t = pHead;
+        while(t){
+            if(t->random){
+                int a = bef[t];
+                int b = bef[t->random];
+                aft[a] ->random = aft[b];
+            }
+            t=t->next;
         }
+
         return head;
     }
 };
@@ -106,7 +90,7 @@ int main(){
     int a = clock();
 
     vector<int> v ;
-    for (int i = 0; i < 10000; ++i) {
+    for (int i = 0; i < 100; ++i) {
         v.push_back(i);
     }
 
