@@ -8,7 +8,7 @@ using namespace Trees;
 
 class Solution {
 public:
-    vector<TreeNode **> list;
+    vector<TreeNode *> list;
     TreeNode * r  = NULL;
 
     void InOrderTraverse(TreeNode * root){
@@ -18,38 +18,29 @@ public:
         if(!r){
             r = root;
         }
-        list.push_back(&(root->left));
-        list.push_back(&root);
-        list.push_back(&(root->right));
+        list.push_back(root);
+
         if(root->right){
             InOrderTraverse(root->right);
         }
     }
+
     TreeNode* Convert(TreeNode* pRootOfTree)
     {
         if(!pRootOfTree){return NULL;}
 
         InOrderTraverse(pRootOfTree);
+        list[0]->left = NULL;
+        list[list.size()-1]->right = NULL;
 
-        *(list[0]) = NULL;
-        *(list[list.size()-1]) = NULL;
-
-        for (int i = 1; i < list.size()-1; ++i) {
-            switch (i%3){
-                case 0:
-//                    left
-                    *(list[i]) = *(list[i-2]);
-                    break;
-                case 1:
-                    break;
-                case 2:
-//                    right
-                    *(list[i]) = *(list[i+2]);
-                    break;
-                default:
-                    break;
-            }
+        for (int i = 0; i < list.size()-1; ++i) {
+            list[i]->right=list[i+1];
         }
+
+        for (int i = 1; i < list.size(); ++i) {
+            list[i]->left = list[i-1];
+        }
+
         return r;
     }
 };
