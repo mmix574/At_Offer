@@ -5,22 +5,31 @@ using namespace std;
 
 class Solution {
 public:
+    int NumberOf1(int x){
+        int sum  = 0 ;
+        while(x){
+            if(x%10==1){
+                sum++;
+            }
+            x/=10;
+        }
+        return sum;
+    }
+
     int NumberOf1Between1AndN_Solution(int n)
     {
-        if(n<0){
-            return 0;
+        int sum = 0;
+        for (int i = 0; i <=n ; ++i) {
+            sum+=NumberOf1(i);
         }
-        if(n<10){
-            return 1;
-        }else{
-            int a = n/10;
-            return 1+NumberOf1Between1AndN_Solution(a)*10;
-        }
+        return sum;
     }
 };
 
 int main(){
     Solution s;
-    cout<<s.NumberOf1Between1AndN_Solution(30)<<endl;
+    int start = 100;
+    int end = 1300;
+    cout<<s.NumberOf1Between1AndN_Solution(end)-s.NumberOf1Between1AndN_Solution(start-1)<<endl;
     return 0;
 }
