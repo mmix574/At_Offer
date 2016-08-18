@@ -4,5 +4,7 @@ project(At_Offer)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 include_directories("Model")
-set(SOURCE_FILES 032.cpp)
+include_directories("Math")
+
+set(SOURCE_FILES test/main.cpp)
 add_executable(At_Offer ${SOURCE_FILES})

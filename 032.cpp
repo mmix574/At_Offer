@@ -1,5 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <math.h>
+
 using namespace std;
 
 class Solution {
@@ -11,21 +14,26 @@ public:
         }
         return x;
     }
-    string PrintMinNumber(vector<int> numbers) {
-        int len = numbers.size();
-        if(!len){return rs;}
-        int min_start = top(numbers[0]);
-
-        for (int i = 0; i < numbers.size(); ++i) {
-            int t = top(numbers[i]);
-            if(t==1){
-                min_start = 1;
-                break;
-            }else if(min_start>t){
-                min_start = t;
-            }
+    int move_top(int x){
+        if(!x){return 0;}
+        int len = 0;
+        while (x){
+            len ++;
+            x/=10;
         }
-        
+        return x -
+    }
+    bool cmp(int a,int b){
+        if(top(a)<top(b)){
+            return true;
+        }else if(top(a)==top(b)){
+            return cmp();
+        }else{
+            return false;
+        }
+    }
+    string PrintMinNumber(vector<int> numbers) {
+
     }
 };
 
