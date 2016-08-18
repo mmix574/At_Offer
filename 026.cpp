@@ -55,6 +55,17 @@ public:
 };
 
 int main(){
-    
+    vector<int > v = {1,2,3,4,5,6,7,8,9};
+    TreeNode * t = create(v);
+    PreOrderTraverse(t);
+    cout<<endl;
+
+    Solution s;
+    TreeNode * p= s.Convert(t);
+    while(p){
+        cout<<p->val<<" ";
+        p=p->right;
+    }
+
     return 0;
 }
