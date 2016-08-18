@@ -1,19 +1,10 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include "Model/TreeNode.h"
 
 using namespace std;
-
-
-struct TreeNode {
-	int val;
-	struct TreeNode *left;
-	struct TreeNode *right;
-	TreeNode(int x) :
-			val(x), left(NULL), right(NULL) {
-	}
-};
-
+using namespace Trees;
 
 class Solution {
 public:
@@ -64,6 +55,6 @@ public:
 };
 
 int main(){
-
+    
     return 0;
 }
