@@ -21,7 +21,7 @@ public:
             len ++;
             x/=10;
         }
-        return x -
+        return x - pow(10,len);
     }
     bool cmp(int a,int b){
         if(top(a)<top(b)){

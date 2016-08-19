@@ -18,8 +18,8 @@ namespace Math{
         }else if(i==1){
             return a;
         }else{
-            int half = pow(a/2);
-            if(i%2==0){return half*half}
+            int half = Math::pow(a,i/2);
+            if(i%2==0){return half*half;}
             else{
                 return half*half*a;
             }
