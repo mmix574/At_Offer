@@ -37,17 +37,23 @@ public:
             }
         }
         if(!a_s.empty()){
-            if(a_s.top()<top){
-                return true;
-            }else{
-                return false;
+            while (!a_s.empty()){
+                if(a_s.top()<top){
+                    return true;
+                }else{
+                    a_s.pop();
+                }
             }
+            return false;
         }else if(!b_s.empty()){
-            if(b_s.top()<top){
-                return true;
-            }else{
-                return false;
+            while(!b_s.empty()){
+                if(b_s.top()<top){
+                    return false;
+                }else{
+                    b_s.pop();
+                }
             }
+            return true;
         }else {
             return true;
         }
@@ -94,7 +100,9 @@ int main(){
 //    }
 
     Solution s;
-    vector<int> test_case = {3,32,321};
+//    vector<int> test_case = {3,32,321};
+    vector<int> test_case = {3334,3,3333332};
+
     cout<<s.PrintMinNumber(test_case)<<endl;
 //    if(s.cmp(0,5)){
 //        cout<<"true"<<endl;
