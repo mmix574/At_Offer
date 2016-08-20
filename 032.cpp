@@ -59,9 +59,17 @@ public:
         }
 
     }
+
+    static bool cmpp(int a,int b){
+        if(to_string(a)+to_string(b)<to_string(b)+to_string(a)){
+            return true;
+        }else{
+            return false;
+        }
+    }
     string PrintMinNumber(vector<int> numbers) {
         string rs ;
-        sort(numbers.begin(),numbers.end(),cmp);
+        sort(numbers.begin(),numbers.end(),cmpp);
         for (int i = 0; i < numbers.size(); ++i) {
             rs.append(to_string(numbers[i]));
         }
@@ -109,6 +117,20 @@ int main(){
 //    }else{
 //        cout<<"false"<<endl;
 //    }
+    string s1 = "332";
+    string s2 = "332";
+    if(s2.find_first_not_of(s1)){
+        cout<<"find"<<endl;
+    }else{
+        cout<<"not found"<<endl;
+    }
 
+    if(s1>s2){
+        cout<<">"<<endl;
+    }else{
+        cout<<"<"<<endl;
+    }
+    int i = 1000;
+    cout<<to_string(i)<<endl;
     return 0;
 }
