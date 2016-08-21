@@ -13,22 +13,15 @@ public:
         if(index>10){
             return (120*index/10)*(index%10);
         }else{
-            int i = 0;
-            int r = 1;
-            while((mapping[index-1]>>i)&1){
-                r *= mapping[index-1];
-                i++;
-            }
-            return r;
+            return (mapping[index-1]&1)*2 + (mapping[index-1]&2)*3 + (mapping[index-1]&4)*4 + (mapping[index-1]&8)*5;
         }
     }
 };
 
 int main(){
-//    Solution s;
-//    cout<<s.GetUglyNumber_Solution(2)<<endl;
-    int i = 0b0011;
-    cout<<i<<endl;
-
+    Solution s;
+    cout<<s.GetUglyNumber_Solution(3)<<endl;
+//    int i = 0b0011;
+//    cout<<i<<endl;
     return 0;
 }
