@@ -1,0 +1,3 @@
+C:/Users/taita/Desktop/At_Offer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/taita/Desktop/At_Offer/cmake-build-debug/CMakeFiles/At_Offer.dir
+C:/Users/taita/Desktop/At_Offer/cmake-build-debug/CMakeFiles/edit_cache.dir
