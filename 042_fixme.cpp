@@ -2,11 +2,14 @@
 // Created by taita on 2017/2/11.
 //
 
+
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
+
 
 class Solution {
 public:
@@ -16,12 +19,13 @@ public:
         for (int i = 0; i < numbers.size()-1; ++i) {
             if(numbers[i]==0){
                 zero_count++;
-            }else{
-                if(numbers[i+1]-numbers[i]-1<=zero_count){
+            }else if(numbers[i+1]==numbers[i]){
+                return false;
+            }
+            else if(numbers[i+1]-numbers[i]-1<=zero_count){
                     zero_count-=numbers[i+1]-numbers[i]-1;
-                }else{
-                    return false;
-                }
+            }else{
+                return false;
             }
         }
         return true;
@@ -30,8 +34,8 @@ public:
 
 int main(){
     Solution s;
-    vector<int> data = {3,1,4,5,2};
-    cout<<s.IsContinuous(data)<<endl;
-
+    vector<int> data = {7,8,9,0,11};
+//    cout<<s.IsContinuous(data)<<endl;
+    cout<<data.size()<<endl;
     return 0;
 }
