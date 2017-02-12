@@ -15,7 +15,7 @@ public:
             student.push_back(i);
         }
         while(student.size()>1){
-            int currentPosition = (currentPosition + m )%student.size();
+            int currentPosition = (currentPosition + m -1)%student.size();
             student.erase(student.begin()+currentPosition);
             if(currentPosition==student.size()){
                 currentPosition = 0;
@@ -27,6 +27,6 @@ public:
 
 int main(){
     Solution s;
-    cout<<s.LastRemaining_Solution(7,2)<<endl;
+    cout<<s.LastRemaining_Solution(100,7)<<endl;
 
 }
