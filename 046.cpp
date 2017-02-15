@@ -34,12 +34,11 @@ public:
         str.erase(0,str.find_first_not_of(' '));
         str.erase(str.find_last_not_of(' ')+1,str.length());
 
-        if(sign = charSign(str[0])){
-            str.erase(0);
+        if((sign = charSign(str[0]))!=0){
+            str.erase(str.begin());
         }
 
-        cout<<str<<endl;
-        
+
         if(!validata(str)){
             return 0;
         }
@@ -58,7 +57,7 @@ public:
 };
 int main(){
     Solution s;
-    int a = s.StrToInt("  123  ");
+    int a = s.StrToInt("  +-1  ");
     cout<<a<<endl;
     return 0;
 }
