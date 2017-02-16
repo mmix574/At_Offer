@@ -10,51 +10,45 @@ class Solution
 {
 public:
     string s;
-    int size = 0;
-    vector<char> v;
-    int moreThanTwo[256] = {0};
+    int len = 0;
+    int hashTable[256] = {0};
 
     //Insert one char from stringstream
     void Insert(char ch)
     {
         s+=ch;
-        size++;
-    }
-    bool inSet(char ch){
-        for (int i = 0; i < v.size(); ++i) {
-            if(v[i]==ch){
-                return true;
-            }
-        }
-        return false;
-    }
-    bool deSet(char ch){
-        for (int i = 0; i < v.size(); ++i) {
-            if(v[i]==ch){
-                v.erase(v.begin()+i);
-                return true;
-            }
-        }
-        return false;
+        len++;
     }
     //return the first appearence once char in current stringstream
     char FirstAppearingOnce()
     {
-        if(inSet(s[size-1])){
-
-        }else{
-
+        hashTable[s[len-1]]+=1;
+        for (int j = 0; j < s.length(); ++j) {
+            if(hashTable[int(s[j])]==1){
+                return s[j];
+            }
         }
+        return '#';
     }
 };
 
 int main(){
     Solution s;
     s.Insert('g');
+    cout<<s.FirstAppearingOnce()<<endl;
+
     s.Insert('o');
+    cout<<s.FirstAppearingOnce()<<endl;
+
     s.Insert('o');
+    cout<<s.FirstAppearingOnce()<<endl;
+
     s.Insert('g');
+    cout<<s.FirstAppearingOnce()<<endl;
+
     s.Insert('l');
+    cout<<s.FirstAppearingOnce()<<endl;
+
     s.Insert('e');
     cout<<s.FirstAppearingOnce()<<endl;
     return 0;
