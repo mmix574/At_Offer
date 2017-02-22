@@ -1,27 +1,45 @@
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
 class Solution {
 public:
-    int GetUglyNumber_Solution(int index) {
-                         /*5 4 3 2*/
-        int mapping[10]={0b0001,0b0010,0b0100,0b1000,0b0011,0b0101,0b1001,0b0111,0b1011,0b1111};
-        if(index<0) return 0;
-        if(index == 1) return 1;
+	vector<int> nums;
+	int p2 = 0;
+	int p3 = 0;
+	int p5 = 0;
+	Solution(){
+		nums.push_back(1);
+	}
 
-        if(index>10){
-            return (120*index/10)*(index%10);
-        }else{
-            return (mapping[index-1]&1)*2 + (mapping[index-1]&2)*3 + (mapping[index-1]&4)*4 + (mapping[index-1]&8)*5;
-        }
+    int GetUglyNumber_Solution(int index) {
+    	while(nums.size()<index){
+    		int two = nums[p2]*2;
+    		int three = nums[p3]*3;
+    		int five = nums[p5]*5;
+    		if(two<=three&&two<=five){
+	    		if(nums[nums.size()-1]!=two){
+	    			nums.push_back(two);
+	    		}
+	    		p2++;
+	    	}else if(three<=two&&three<=five){
+	    		if(nums[nums.size()-1]!=three){
+		    		nums.push_back(three);
+	    		}
+	    		p3++;
+	    	}else{
+	    		if(nums[nums.size()-1]!=five){
+		    		nums.push_back(five);
+	    		}
+	    		p5++;
+	    	}
+    	}
+    	return nums[index-1];
     }
 };
 
 int main(){
     Solution s;
-    cout<<s.GetUglyNumber_Solution(3)<<endl;
-//    int i = 0b0011;
-//    cout<<i<<endl;
+    cout<<s.GetUglyNumber_Solution(6)<<endl;
     return 0;
 }
