@@ -23,7 +23,7 @@ public:
         int i = 0;
         queue<TreeNode*> q;
 
-        
+
         //levelTraverse
     }
     TreeNode* Deserialize(char *str) {
