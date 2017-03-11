@@ -8,6 +8,9 @@ public:
     {
         vector<int> res(num);
         int length = num.size();
+        if(length<size){
+        	return res;
+        }
         for (int i = 0; i <= length-size; ++i)
         {
         	for (int j = i; j < i+size; j++)
