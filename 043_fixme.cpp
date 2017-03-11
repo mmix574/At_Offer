@@ -5,28 +5,30 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+
 class Solution {
 public:
-    int LastRemaining_Solution(int n, int m)
-    {
-        vector<int> student;
-        int currentPosition = 0;
-        for (int i = 0; i < n; ++i) {
-            student.push_back(i);
-        }
-        while(student.size()>1){
-            int currentPosition = (currentPosition + m -1)%student.size();
-            student.erase(student.begin()+currentPosition);
-            if(currentPosition==student.size()){
-                currentPosition = 0;
+    int getLive(int student[],n){
+        for (int i = 0; i < n; ++i)
+        {
+            if(student[i]==0){
+                return i;
             }
         }
-        return student[0];
+        return -1;
+    }
+    int LastRemaining_Solution(int n, int m)
+    {
+        if(!n) return 0;
+        bool student[n] = {0};
+        int dead = 0;
+        if(dead+1=n){
+            return getLive(student,n);
+        }
     }
 };
 
 int main(){
     Solution s;
     cout<<s.LastRemaining_Solution(100,7)<<endl;
-
 }
