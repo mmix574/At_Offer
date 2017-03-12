@@ -43,14 +43,14 @@ public:
 		tail->next = head;
 		ListNode *t = tail;
 		while(n>1){
-			int cut = m%n;
+			int cut = (m-1)%n;
+				// printf("len:%d\n",cut-1);
 			for (int i = 0; i < cut; ++i)
 			{
 				t=t->next;
 			}
 			ListNode *p = t->next;
 			t->next = p->next;
-			cout<<p->val<<endl;
 			n--;
 		}
 		return t->val;
